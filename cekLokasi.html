@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cek Lokasi</title>
+</head>
+
+<body>
+    <p>klik tombol di bawah untuk melihat koordinat lokasi saat ini</p>
+    <button onclick="getLocation()">Cek Lokasi</button>
+    <br>
+    <br>
+    <div id="dataLokasi"></div>
+    <br>
+    <button onclick="verification()">Verifikasi</button>
+    <p style="font-family: sans-serif; font-style: italic;">status lokasi:</p>
+    <p id="verifikasi"></p>
+
+    <script>
+        let lokasi = document.getElementById("dataLokasi")
+        let verifikasi = document.getElementById("verifikasi")
+        let lintang = 0
+        let bujur = 0
+
+        // let locationHistory = []
+
+        // getLocation()
+        // setInterval(() => {
+        //     getLocation()
+        //     locationHistory.push(`${lintang},${bujur}`)
+        //     console.log(locationHistory)
+        //     verification()
+        // }, 5000)
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+                // console.log(navigator.geolocation.getCurrentPosition(showPosition));
+
+            } else {
+                lokasi.innerHTML = "Geolocation tidak dapat di buka di browser ini"
+            }
+        }
+
+        function showPosition(position) {
+
+            lintang = position.coords.latitude
+            bujur = position.coords.longitude
+            lokasi.innerHTML = `Latitude: ${lintang} <br> Longitude: ${bujur}`
+            // console.log(`${lintang}, ${bujur}`)
+            // console.log(bujur)
+
+        }
+
+        // fungsi untuk verifikasi
+        function verification() {
+            // console.log(`dari function verfification ${lintang} ${bujur}`)
+        
+
+            if (lintang >= 0.5317278 && lintang <= 0.532395 && bujur >= 101.450174 && bujur <= 101.450939) {
+                verifikasi.innerHTML = "Lokasi Valid"
+            }
+            else {
+                verifikasi.innerHTML = "Anda tidak pada posisi yang tepat"
+            }
+        }
+
+    </script>
+</body>
+
+</html>
